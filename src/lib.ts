@@ -78,8 +78,13 @@ export async function loadChannelPositions(client: Client) {
       channel.parentId,
       channel.position
     )
-    await channel.setParent(p.parent)
-    await channel.setPosition(p.position)
+    await channel.setParent(p.parent, {
+      lockPermissions: false,
+      reason: 'lock-move-channel',
+    })
+    await channel.setPosition(p.position, {
+      reason: 'lock-move-channel',
+    })
   }
   console.log('Channel positions loaded.')
 }
