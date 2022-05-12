@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@types/config": "0.0.41",
-    "@types/node": "16.11.34",
+    "@types/node": "16.11.35",
     "@types/utf8": "3.0.1",
     "@typescript-eslint/eslint-plugin": "5.23.0",
     "@typescript-eslint/parser": "5.23.0",
