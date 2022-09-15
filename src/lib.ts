@@ -51,6 +51,7 @@ export async function loadChannelPositions(client: Client) {
   const guild = await client.guilds.fetch(guildId)
   const channels = await guild.channels.fetch()
   for (const channel of channels.values()) {
+    if (channel === null) continue
     const p = positions[channel.id]
     if (!p) {
       continue
