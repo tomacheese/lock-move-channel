@@ -4,7 +4,6 @@ import {
   Client,
   DMChannel,
   GuildMemberRoleManager,
-  Intents,
   NonThreadGuildBasedChannel,
 } from 'discord.js'
 import {
@@ -19,11 +18,7 @@ let locked = true
 let loading = false
 
 const client = new Client({
-  intents: [
-    Intents.FLAGS.GUILDS,
-    Intents.FLAGS.GUILD_MESSAGES,
-    Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-  ],
+  intents: ['Guilds', 'GuildMessages', 'GuildMessageReactions'],
 })
 
 client.on('ready', async () => {
@@ -62,7 +57,8 @@ client.on('interactionCreate', async (interaction) => {
   const command = interaction.command
   if (!command) return
   if (!isCommandAllow(interaction.member?.roles as GuildMemberRoleManager)) {
-    return interaction.reply('このコマンドは実行できません。')
+    await interaction.reply('このコマンドは実行できません。')
+    return
   }
   await interaction.deferReply()
   if (command.name === 'position-lock') {
