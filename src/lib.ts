@@ -24,6 +24,7 @@ export async function saveChannelPositions(client: Client) {
     }
   } = {}
   for (const channel of channels.values()) {
+    if (channel === null) continue
     channelPositions[channel.id] = {
       parent: channel.parent ? channel.parent.id : null,
       position: channel.position,
