@@ -70,12 +70,15 @@ client.on('interactionCreate', async (interaction) => {
     await saveChannelPositions(client)
     locked = false
     await interaction.editReply(
-      'チャンネルの位置を移動できるようにしました。5分後に再度ロックされます。'
+      'チャンネルの位置を移動できるようにしました。5分後に再度ロックされます。',
     )
-    setTimeout(() => {
-      locked = true
-      interaction.editReply('5分経過したため、再ロックしました。')
-    }, 5 * 60 * 1000)
+    setTimeout(
+      () => {
+        locked = true
+        interaction.editReply('5分経過したため、再ロックしました。')
+      },
+      5 * 60 * 1000,
+    )
   }
   if (command.name === 'position-save') {
     await saveChannelPositions(client)
@@ -109,7 +112,7 @@ client.on(
   'channelUpdate',
   async (
     oldTempChannel: DMChannel | NonThreadGuildBasedChannel,
-    newTempChannel: DMChannel | NonThreadGuildBasedChannel
+    newTempChannel: DMChannel | NonThreadGuildBasedChannel,
   ) => {
     if (
       oldTempChannel instanceof DMChannel &&
@@ -133,7 +136,7 @@ client.on(
       oldChannel.name,
       oldChannel.rawPosition,
       newChannel.rawPosition,
-      oldChannel.rawPosition === newChannel.rawPosition
+      oldChannel.rawPosition === newChannel.rawPosition,
     )
 
     if (oldChannel.rawPosition === newChannel.rawPosition) return
@@ -141,7 +144,7 @@ client.on(
     loading = true
     await loadChannelPositions(client)
     loading = false
-  }
+  },
 )
 
 client
