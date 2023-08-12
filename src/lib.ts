@@ -70,7 +70,7 @@ export async function loadChannelPositions(client: Client) {
         channel.parentId +
         ' -> ' +
         p.parent +
-        ')'
+        ')',
     )
     await report(
       client,
@@ -78,7 +78,7 @@ export async function loadChannelPositions(client: Client) {
       p.parent,
       p.position,
       channel.parentId,
-      channel.position
+      channel.position,
     )
     await channel.setParent(p.parent, {
       lockPermissions: false,
@@ -97,7 +97,7 @@ async function report(
   oldParentId: string | null,
   oldPosition: number,
   newParentId: string | null,
-  newPosition: number
+  newPosition: number,
 ) {
   const reportChannelId = config.get<string>('reportChannelId')
   const reportChannel = await client.channels.fetch(reportChannelId)
