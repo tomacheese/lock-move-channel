@@ -1,10 +1,9 @@
 {
-  "ts-node": { "files": true },
   "compilerOptions": {
     "target": "es2020",
     "module": "commonjs",
     "moduleResolution": "Node",
-    "lib": ["es2020", "ESNext.AsyncIterable"],
+    "lib": ["ESNext", "esnext.AsyncIterable"],
     "outDir": "./dist",
     "removeComments": true,
     "esModuleInterop": true,
@@ -23,7 +22,10 @@
     "noFallthroughCasesInSwitch": true,
     "experimentalDecorators": true,
     "baseUrl": ".",
-    "newLine": "LF"
+    "newLine": "LF",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["src/**/*"]
 }
