@@ -23,13 +23,18 @@
     "lint:eslint": "eslint . --ext ts,tsx",
     "lint": "run-z lint:prettier,lint:eslint,lint:tsc",
     "fix:prettier": "prettier --write src",
-    "lint:tsc": "tsc"
+    "lint:tsc": "tsc",
+    "compile": "tsc -p .",
+    "clean": "rimraf dist output",
+    "packing": "ncc build dist/main.js -o output",
+    "package": "run-z clean compile packing"
   },
   "devDependencies": {
     "@book000/node-utils": "1.10.2",
     "@types/node": "20.9.2",
     "@typescript-eslint/eslint-plugin": "6.11.0",
     "@typescript-eslint/parser": "6.11.0",
+    "@vercel/ncc": "0.38.1",
     "discord.js": "14.14.1",
     "eslint": "8.54.0",
     "eslint-config-prettier": "9.0.0",
@@ -39,6 +44,7 @@
     "eslint-plugin-promise": "6.1.1",
     "eslint-plugin-unicorn": "49.0.0",
     "prettier": "3.1.0",
+    "rimraf": "5.0.5",
     "run-z": "2.0.0",
     "tsx": "4.1.4",
     "typescript": "5.2.2"

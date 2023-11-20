@@ -41,7 +41,7 @@ After that, you can start it with `node index.js` after creating a configuration
 ## Configuration
 
 The configuration file `data/config.json` is used by default.  
-If the environment variable `CONFIG_FILE` is set, the specified value is taken as the path to the configuration file.
+If the environment variable `CONFIG_FILE` or `CONFIG_PATH` is set, the specified value is taken as the path to the configuration file.
 
 See here for the JSON Schema of the configuration file: [schema/Configuration.json](schema/Configuration.json)
 
