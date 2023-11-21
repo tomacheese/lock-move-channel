@@ -33,9 +33,9 @@ After that, you can start it with `docker compose up -d` after creating a config
 
 ### Node.js
 
-If you are running in a Node.js environment, Node.js v18 is recommended.
+If you are running in a Node.js environment, Node.js v20 is recommended.
 
-Download and extract `twitter-dm-memo_vX.Y.Z.zip` from the [release page](https://github.com/tomacheese/twitter-dm-memo/releases) in the latest release.  
+Download and extract `lock-move-channel_vX.Y.Z.zip` from the [release page](https://github.com/tomacheese/lock-move-channel/releases) in the latest release.  
 After that, you can start it with `node index.js` after creating a configuration file with reference to [Configuration section](#configuration).
 
 ## Configuration
@@ -47,7 +47,7 @@ See here for the JSON Schema of the configuration file: [schema/Configuration.js
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/tomacheese/twitter-dm-memo/master/schema/Configuration.json"
+  "$schema": "https://raw.githubusercontent.com/tomacheese/lock-move-channel/master/schema/Configuration.json"
 }
 ```
 
