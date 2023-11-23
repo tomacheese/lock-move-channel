@@ -2,6 +2,11 @@
 
 Detects and undoes Discord channel moves.
 
+## Requirements
+
+- Native Node.js or Docker
+- Vaild Discord bot & token
+
 ## Features
 
 - You can lock down channel reordering on multiple Discord servers with just one application running.
@@ -29,9 +34,9 @@ services:
     restart: always
 ```
 
-After that, you can start it with `docker compose up -d` after creating a configuration file with reference to [Configuration section](#configuration).
+You can then refer to the [configuration section](#configuration) to create a configuration file and then launch it with `docker compose up -d`.
 
-### Node.js
+### Native Node.js
 
 If you are running in a Node.js environment, Node.js v20 is recommended.
 
