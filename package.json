@@ -48,7 +48,7 @@
     "run-z": "2.0.0",
     "tsx": "4.7.1",
     "typescript": "5.3.3",
-    "typescript-json-schema": "0.62.0"
+    "typescript-json-schema": "0.63.0"
   },
   "packageManager": "pnpm@8.15.2"
 }
