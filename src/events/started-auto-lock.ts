@@ -6,9 +6,7 @@ import { Logger } from '@book000/node-utils'
  * アプリケーションが起動したとき、すべてのサーバのチャンネル並び替えをロック状態にする
  */
 export class StartedAutoLockEvent extends BaseDiscordEvent<'ready'> {
-  get eventName(): 'ready' {
-    return 'ready'
-  }
+  readonly eventName = 'ready'
 
   async execute(): Promise<void> {
     const logger = Logger.configure(this.constructor.name + '.execute')

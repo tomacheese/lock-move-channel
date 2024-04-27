@@ -14,9 +14,9 @@ export interface ChangedChannelPosition {
  */
 export class MovedChannelManager {
   private static readonly _instance = new MovedChannelManager()
-  private movedChannels: Map<string, ChangedChannelPosition[]> = new Map()
+  private movedChannels = new Map<string, ChangedChannelPosition[]>()
 
-  // eslint-disable-next-line no-useless-constructor
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
   public static get instance(): MovedChannelManager {

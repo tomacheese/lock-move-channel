@@ -2,7 +2,7 @@ import { Logger } from '@book000/node-utils'
 import { Configuration } from './config'
 import { Discord } from './discord'
 
-async function main() {
+function main() {
   const logger = Logger.configure('main')
   const config = new Configuration('data/config.json')
   config.load()
@@ -24,12 +24,4 @@ async function main() {
   })
 }
 
-;(async () => {
-  try {
-    await main()
-  } catch (error) {
-    Logger.configure('main').error('Error', error as Error)
-    // eslint-disable-next-line unicorn/no-process-exit
-    process.exit(1)
-  }
-})()
+main()

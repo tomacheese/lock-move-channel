@@ -10,9 +10,7 @@ import { MovedChannelManager } from '@/manager/moved-channel-manager'
  * - チャンネル並び替えがロックされていない場合、並び順を保存する
  */
 export class MovedChannelEvent extends BaseDiscordEvent<'channelUpdate'> {
-  get eventName(): 'channelUpdate' {
-    return 'channelUpdate'
-  }
+  readonly eventName = 'channelUpdate'
 
   async execute(
     oldChannel: DMChannel | NonThreadGuildBasedChannel,

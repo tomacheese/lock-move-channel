@@ -1,4 +1,4 @@
-import { CacheType, ChatInputCommandInteraction, Guild } from 'discord.js'
+import { ChatInputCommandInteraction, Guild } from 'discord.js'
 import { setTimeout } from 'node:timers/promises'
 import { LockMoveChannelServer } from '../server'
 import { Logger } from '@book000/node-utils'
@@ -9,17 +9,17 @@ import { Discord } from '@/discord'
  */
 export class AutoLockManager {
   private static readonly _instance = new AutoLockManager()
-  private lockController: Map<string, AbortController> = new Map()
+  private lockController = new Map<string, AbortController>()
 
   private readonly seconds = 5 * 60
 
-  // eslint-disable-next-line no-useless-constructor
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
   set(
     guild: Guild,
     discord: Discord,
-    interaction: ChatInputCommandInteraction<CacheType>
+    interaction: ChatInputCommandInteraction
   ): void {
     const id = guild.id
 
@@ -45,12 +45,16 @@ export class AutoLockManager {
             const logger = Logger.configure(this.constructor.name + '.set')
             logger.info(`✅ Auto Locked: ${guild.name} (${guild.id})`)
           })
+          .catch((error: unknown) => {
+            const logger = Logger.configure(this.constructor.name + '.set')
+            logger.error('❌ Auto Lock Error', error as Error)
+          })
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         const logger = Logger.configure(this.constructor.name + '.set')
         logger.error('❌ Auto Lock Error', error as Error)
 
-        if (error.name === 'AbortError') {
+        if ((error as Error).name === 'AbortError') {
           return discord.sendError(interaction, {
             title: '❌ 再ロックに失敗',
             description: '再ロック処理が中断されました。',
@@ -59,7 +63,7 @@ export class AutoLockManager {
 
         return discord.sendError(interaction, {
           title: '❌ 再ロックに失敗',
-          description: `エラーが発生したため、再ロック処理に失敗しました。\n\nErrorName: ${error.name}\nErrorMessage: ${error.message}`,
+          description: `エラーが発生したため、再ロック処理に失敗しました。\n\nErrorName: ${(error as Error).name}\nErrorMessage: ${(error as Error).message}`,
         })
       })
       .finally(() => {

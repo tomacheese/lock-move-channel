@@ -100,7 +100,7 @@ export class Discord {
     )
   }
 
-  async onInteractionCreate(interaction: BaseInteraction<CacheType>) {
+  async onInteractionCreate(interaction: BaseInteraction) {
     if (!interaction.isChatInputCommand()) {
       return
     }
@@ -206,9 +206,9 @@ export class Discord {
   }
 
   async sendSuccess(
-    interaction: ChatInputCommandInteraction<CacheType>,
+    interaction: ChatInputCommandInteraction,
     embed: Omit<APIEmbed, 'color' | 'timestamp' | 'footer'>,
-    updateCommands: boolean = true
+    updateCommands = true
   ): Promise<void> {
     if (!interaction.guild) return
     if (!interaction.deferred) await interaction.deferReply()
@@ -248,7 +248,7 @@ export class Discord {
   }
 
   async sendError(
-    interaction: ChatInputCommandInteraction<CacheType>,
+    interaction: ChatInputCommandInteraction,
     embed: Omit<APIEmbed, 'color' | 'timestamp' | 'footer'>
   ): Promise<void> {
     if (!interaction.guild) return

@@ -7,9 +7,7 @@ import { NonThreadGuildBasedChannel } from 'discord.js'
  * チャンネルが作成されたとき、チャンネル並び順を保存する
  */
 export class CreatedChannelEvent extends BaseDiscordEvent<'channelCreate'> {
-  get eventName(): 'channelCreate' {
-    return 'channelCreate'
-  }
+  readonly eventName = 'channelCreate'
 
   async execute(channel: NonThreadGuildBasedChannel): Promise<void> {
     const logger = Logger.configure(this.constructor.name + '.execute')
