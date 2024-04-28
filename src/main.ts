@@ -18,9 +18,16 @@ function main() {
   const discord = new Discord(config)
   process.once('SIGINT', () => {
     logger.info('👋 SIGINT signal received.')
-    discord.close()
-
-    process.exit(0)
+    discord
+      .close()
+      .then(() => {
+        logger.info('👋 Discord client closed.')
+        process.exit(0)
+      })
+      .catch((error: unknown) => {
+        logger.error('❌ Failed to close Discord client.', error as Error)
+        process.exit(1)
+      })
   })
 }
 
