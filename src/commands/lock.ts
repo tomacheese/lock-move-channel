@@ -1,5 +1,4 @@
 import {
-  CacheType,
   ChatInputCommandInteraction,
   BaseGuild,
   SlashCommandSubcommandGroupBuilder,
@@ -42,7 +41,7 @@ export class LockCommand implements BaseCommand {
 
   async execute(
     discord: Discord,
-    interaction: ChatInputCommandInteraction<CacheType>
+    interaction: ChatInputCommandInteraction
   ): Promise<void> {
     const logger = Logger.configure(this.constructor.name + '.execute')
     await interaction.deferReply()

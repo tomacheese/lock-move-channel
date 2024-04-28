@@ -1,5 +1,4 @@
 import {
-  CacheType,
   ChatInputCommandInteraction,
   BaseGuild,
   SlashCommandSubcommandGroupBuilder,
@@ -55,7 +54,7 @@ export class RegisterCommand implements BaseCommand {
 
   async execute(
     discord: Discord,
-    interaction: ChatInputCommandInteraction<CacheType>
+    interaction: ChatInputCommandInteraction
   ): Promise<void> {
     const logger = Logger.configure(this.constructor.name + '.execute')
     await interaction.deferReply()

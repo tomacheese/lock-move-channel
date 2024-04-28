@@ -1,7 +1,6 @@
 import { Discord } from '@/discord'
 import {
   BaseGuild,
-  CacheType,
   ChatInputCommandInteraction,
   PermissionResolvable,
   SlashCommandSubcommandBuilder,
@@ -40,6 +39,6 @@ export abstract class BaseCommand {
   /** 実行: サブコマンドの実行定義 */
   abstract execute(
     discord: Discord,
-    interaction: ChatInputCommandInteraction<CacheType>
+    interaction: ChatInputCommandInteraction
   ): Promise<void>
 }

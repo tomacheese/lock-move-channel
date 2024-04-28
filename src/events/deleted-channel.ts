@@ -7,9 +7,7 @@ import { DMChannel, NonThreadGuildBasedChannel } from 'discord.js'
  * チャンネルが削除されたとき、チャンネル並び順を保存する
  */
 export class DeletedChannelEvent extends BaseDiscordEvent<'channelDelete'> {
-  get eventName(): 'channelDelete' {
-    return 'channelDelete'
-  }
+  readonly eventName = 'channelDelete'
 
   async execute(
     channel: DMChannel | NonThreadGuildBasedChannel

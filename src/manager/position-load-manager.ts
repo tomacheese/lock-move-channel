@@ -9,9 +9,9 @@ import {
  */
 export class PositionLoadManager {
   private static readonly _instance = new PositionLoadManager()
-  private loadController: Map<string, AbortController> = new Map()
+  private loadController = new Map<string, AbortController>()
 
-  // eslint-disable-next-line no-useless-constructor
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
   load(server: LockMoveChannelServer): Promise<ChangedChannelPosition[]> {
@@ -22,7 +22,8 @@ export class PositionLoadManager {
         this.loadController.has(id) &&
         !this.loadController.get(id)?.signal.aborted
       ) {
-        return reject(new Error('Already loading.'))
+        reject(new Error('Already loading.'))
+        return
       }
 
       const abortController = new AbortController()
@@ -32,9 +33,9 @@ export class PositionLoadManager {
           this.loadController.delete(id)
           resolve(changes)
         })
-        .catch((error) => {
+        .catch((error: unknown) => {
           this.loadController.delete(id)
-          reject(error)
+          reject(error as Error)
         })
 
       abortController.signal.addEventListener(

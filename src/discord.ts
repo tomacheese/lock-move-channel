@@ -2,7 +2,6 @@ import {
   APIEmbed,
   BaseGuild,
   BaseInteraction,
-  CacheType,
   ChatInputCommandInteraction,
   Client,
   GatewayIntentBits,
@@ -59,7 +58,10 @@ export class Discord {
       event.register()
     }
 
-    this.client.login(config.get('discord').token)
+    this.client.login(config.get('discord').token).catch((error: unknown) => {
+      const logger = Logger.configure('Discord.constructor')
+      logger.error('Failed to login to Discord.', error as Error)
+    })
     this.rest = new REST().setToken(config.get('discord').token)
 
     this.config = config
@@ -73,8 +75,8 @@ export class Discord {
     return this.config
   }
 
-  public close() {
-    this.client.destroy()
+  public async close() {
+    await this.client.destroy()
   }
 
   async onReady() {
@@ -94,13 +96,15 @@ export class Discord {
         )
         this.client.on('interactionCreate', this.onInteractionCreate.bind(this))
 
-        this.updateAllGuildCommands()
+        this.updateAllGuildCommands().catch((error: unknown) => {
+          logger.error('❌ Failed to update commands', error as Error)
+        })
       },
       1000 * 60 * 60
     )
   }
 
-  async onInteractionCreate(interaction: BaseInteraction<CacheType>) {
+  async onInteractionCreate(interaction: BaseInteraction) {
     if (!interaction.isChatInputCommand()) {
       return
     }
@@ -185,11 +189,11 @@ export class Discord {
       .setName('lock-move-channel')
       .setDescription('Discord Event Notifier')
 
-    for (const route in Discord.routes) {
-      if (!Discord.routes[route].conditions(guild)) {
+    for (const route of Discord.routes) {
+      if (!route.conditions(guild)) {
         continue
       }
-      const definition = Discord.routes[route].definition(guild)
+      const definition = route.definition(guild)
       if (!definition) {
         continue
       }
@@ -206,9 +210,9 @@ export class Discord {
   }
 
   async sendSuccess(
-    interaction: ChatInputCommandInteraction<CacheType>,
+    interaction: ChatInputCommandInteraction,
     embed: Omit<APIEmbed, 'color' | 'timestamp' | 'footer'>,
-    updateCommands: boolean = true
+    updateCommands = true
   ): Promise<void> {
     if (!interaction.guild) return
     if (!interaction.deferred) await interaction.deferReply()
@@ -248,7 +252,7 @@ export class Discord {
   }
 
   async sendError(
-    interaction: ChatInputCommandInteraction<CacheType>,
+    interaction: ChatInputCommandInteraction,
     embed: Omit<APIEmbed, 'color' | 'timestamp' | 'footer'>
   ): Promise<void> {
     if (!interaction.guild) return
