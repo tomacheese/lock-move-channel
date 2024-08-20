@@ -54,8 +54,8 @@ importers:
         specifier: 5.4.5
         version: 5.4.5
       typescript-json-schema:
-        specifier: 0.65.0
-        version: 0.65.0
+        specifier: 0.65.1
+        version: 0.65.1
 
 packages:
 
@@ -1772,8 +1772,8 @@ packages:
       typescript:
         optional: true
 
-  typescript-json-schema@0.65.0:
-    resolution: {integrity: sha512-+0aAYa5bviwiEm1uEwW9YNm9tpezq8sON1lOvbTHSQLH87B+9iZw+G7sZHfbPrFff1RmpOmIkD3m/oDlsf8EXQ==}
+  typescript-json-schema@0.65.1:
+    resolution: {integrity: sha512-tuGH7ff2jPaUYi6as3lHyHcKpSmXIqN7/mu50x3HlYn0EHzLpmt3nplZ7EuhUkO0eqDRc9GqWNkfjgBPIS9kxg==}
     hasBin: true
 
   typescript@5.4.5:
@@ -3714,7 +3714,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  typescript-json-schema@0.65.0:
+  typescript-json-schema@0.65.1:
     dependencies:
       '@types/json-schema': 7.0.15
       '@types/node': 18.19.45
