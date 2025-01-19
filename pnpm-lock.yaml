@@ -15,8 +15,8 @@ importers:
         specifier: 1.13.426
         version: 1.13.426
       '@types/node':
-        specifier: 20.16.11
-        version: 20.16.11
+        specifier: 20.17.14
+        version: 20.17.14
       '@vercel/ncc':
         specifier: 0.38.3
         version: 0.38.3
@@ -378,8 +378,8 @@ packages:
   '@types/node@18.19.71':
     resolution: {integrity: sha512-evXpcgtZm8FY4jqBSN8+DmOTcVkkvTmAayeo4Wf3m1xAruyVGzGuDh/Fb/WWX2yLItUiho42ozyJjB0dw//Tkw==}
 
-  '@types/node@20.16.11':
-    resolution: {integrity: sha512-y+cTCACu92FyA5fgQSAI8A1H429g7aSK2HsO7K4XYUWc4dY5IUz55JSDIYT6/VsOLfGy8vmvQYC2hfb0iF16Uw==}
+  '@types/node@20.17.14':
+    resolution: {integrity: sha512-w6qdYetNL5KRBiSClK/KWai+2IMEJuAj+EujKCumalFOwXtvOXaEan9AuwcRID2IcOIAWSIfR495hBtgKlx2zg==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -2230,7 +2230,7 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@types/node@20.16.11':
+  '@types/node@20.17.14':
     dependencies:
       undici-types: 6.19.8
 
@@ -2240,7 +2240,7 @@ snapshots:
 
   '@types/ws@8.5.13':
     dependencies:
-      '@types/node': 20.16.11
+      '@types/node': 20.17.14
 
   '@typescript-eslint/eslint-plugin@8.20.0(@typescript-eslint/parser@8.20.0(eslint@9.18.0)(typescript@5.7.3))(eslint@9.18.0)(typescript@5.7.3)':
     dependencies:
