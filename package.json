@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@book000/eslint-config": "1.8.25",
-    "@book000/node-utils": "1.14.32",
+    "@book000/node-utils": "1.14.33",
     "@types/node": "20.16.11",
     "@vercel/ncc": "0.38.3",
     "discord.js": "14.18.0",
