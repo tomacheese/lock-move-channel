@@ -118,10 +118,7 @@ export class Discord {
       return
     }
 
-    if (
-      !interaction.command ||
-      interaction.command.name !== 'lock-move-channel'
-    ) {
+    if (interaction.command?.name !== 'lock-move-channel') {
       return
     }
     const guild = interaction.guild
@@ -132,7 +129,7 @@ export class Discord {
       const group = interaction.options.getSubcommandGroup()
       const subcommand = interaction.options.getSubcommand()
       const definition = route.definition(guild)
-      return definition && definition.name === (group ?? subcommand)
+      return definition?.name === (group ?? subcommand)
     })
     if (!command) return
 
@@ -147,17 +144,21 @@ export class Discord {
               if (!interaction.guild) {
                 return false
               }
-              const user = interaction.guild.members.resolve(interaction.user)
-              if (!user) return false
-              return user.roles.cache.has(permission.identifier)
+              return (
+                interaction.guild.members
+                  .resolve(interaction.user)
+                  ?.roles.cache.has(permission.identifier) ?? false
+              )
             }
             case 'PERMISSION': {
               if (!interaction.guild) {
                 return false
               }
-              const user = interaction.guild.members.resolve(interaction.user)
-              if (!user) return false
-              return user.permissions.has(permission.identifier)
+              return (
+                interaction.guild.members
+                  .resolve(interaction.user)
+                  ?.permissions.has(permission.identifier) ?? false
+              )
             }
           }
         }
