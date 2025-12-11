@@ -54,8 +54,8 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
       typescript-json-schema:
-        specifier: 0.67.0
-        version: 0.67.0
+        specifier: 0.67.1
+        version: 0.67.1
 
 packages:
 
@@ -1725,8 +1725,8 @@ packages:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '>=4.8.4 <6.0.0'
 
-  typescript-json-schema@0.67.0:
-    resolution: {integrity: sha512-YJ+0Yd7deJBx7y8w2cx0WoSfQ4onx/2yqbjzsbo2Ujr99h4ehpFDj+eWG+5mOERUuUuLeyiwgvSNKq9kAtUTOQ==}
+  typescript-json-schema@0.67.1:
+    resolution: {integrity: sha512-vKTZB/RoYTIBdVP7E7vrgHMCssBuhja91wQy498QIVhvfRimaOgjc98uwAXmZ7mbLUytJmOSbF11wPz+ByQeXg==}
     hasBin: true
 
   typescript@5.5.4:
@@ -1771,6 +1771,11 @@ packages:
 
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
+
+  vm2@3.10.0:
+    resolution: {integrity: sha512-3ggF4Bs0cw4M7Rxn19/Cv3nJi04xrgHwt4uLto+zkcZocaKwP/nKP9wPx6ggN2X0DSXxOOIc63BV1jvES19wXQ==}
+    engines: {node: '>=6.0'}
+    hasBin: true
 
   which-boxed-primitive@1.1.1:
     resolution: {integrity: sha512-TbX3mj8n0odCBFVlY8AxkqcHASw3L60jIuF8jFP78az3C2YhmGvqbHBpAjTRH2/xqYunrJ9g1jSyjCjpoWzIAA==}
@@ -3682,7 +3687,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  typescript-json-schema@0.67.0:
+  typescript-json-schema@0.67.1:
     dependencies:
       '@types/json-schema': 7.0.15
       '@types/node': 18.19.130
@@ -3691,6 +3696,7 @@ snapshots:
       safe-stable-stringify: 2.5.0
       ts-node: 10.9.2(@types/node@18.19.130)(typescript@5.5.4)
       typescript: 5.5.4
+      vm2: 3.10.0
       yargs: 17.7.2
     transitivePeerDependencies:
       - '@swc/core'
@@ -3728,6 +3734,11 @@ snapshots:
   util-deprecate@1.0.2: {}
 
   v8-compile-cache-lib@3.0.1: {}
+
+  vm2@3.10.0:
+    dependencies:
+      acorn: 8.15.0
+      acorn-walk: 8.3.4
 
   which-boxed-primitive@1.1.1:
     dependencies:
