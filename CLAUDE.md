@@ -95,3 +95,4 @@ pnpm install
 6. PR 本文の崩れがないことを確認する。
 
 ## リポジトリ固有
+- 目的: Detects and undoes Discord channel moves.

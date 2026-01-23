@@ -42,3 +42,4 @@ pnpm install
 ## ドキュメント更新
 
 ## リポジトリ固有
+- 目的: Detects and undoes Discord channel moves.
