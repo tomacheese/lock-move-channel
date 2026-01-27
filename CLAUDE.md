@@ -76,7 +76,7 @@ pnpm package
 
 ## 実装パターン
 - `@book000/node-utils` の `Logger`, `ConfigFramework` を活用する
-- スラッシュコマンドは `src/commands` に追加し、`src/commands/index.ts` で登録する
+- スラッシュコマンドは `src/commands` に追加し、`src/discord.ts` で `./commands/*` を import して `Discord.routes` に列挙して登録する
 
 ## テスト
 - 現在テストコードはないが、重要なロジックについてはテストの追加を検討する

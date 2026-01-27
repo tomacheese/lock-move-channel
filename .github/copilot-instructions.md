@@ -19,7 +19,7 @@
 - エラーメッセージは英語で記載する。
 
 ## 技術スタック
-- **言語**: TypeScript (Node.js v20+)
+- **言語**: TypeScript (Node.js v24+)
 - **ライブラリ**: discord.js, @book000/node-utils
 - **パッケージマネージャー**: pnpm
 
