@@ -45,16 +45,16 @@ export class AutoLockManager {
             const logger = Logger.configure(this.constructor.name + '.set')
             logger.info(`✅ Auto Locked: ${guild.name} (${guild.id})`)
           })
-          .catch((error: unknown) => {
+          .catch((err: unknown) => {
             const logger = Logger.configure(this.constructor.name + '.set')
-            logger.error('❌ Auto Lock Error', error as Error)
+            logger.error('❌ Auto Lock Error', err as Error)
           })
       })
-      .catch((error: unknown) => {
+      .catch((err: unknown) => {
         const logger = Logger.configure(this.constructor.name + '.set')
-        logger.error('❌ Auto Lock Error', error as Error)
+        logger.error('❌ Auto Lock Error', err as Error)
 
-        if ((error as Error).name === 'AbortError') {
+        if ((err as Error).name === 'AbortError') {
           return discord.sendError(interaction, {
             title: '❌ 再ロックに失敗',
             description: '再ロック処理が中断されました。',
@@ -63,7 +63,7 @@ export class AutoLockManager {
 
         return discord.sendError(interaction, {
           title: '❌ 再ロックに失敗',
-          description: `エラーが発生したため、再ロック処理に失敗しました。\n\nErrorName: ${(error as Error).name}\nErrorMessage: ${(error as Error).message}`,
+          description: `エラーが発生したため、再ロック処理に失敗しました。\n\nErrorName: ${(err as Error).name}\nErrorMessage: ${(err as Error).message}`,
         })
       })
       .finally(() => {

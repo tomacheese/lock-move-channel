@@ -107,18 +107,18 @@ export class MovedChannelEvent extends BaseDiscordEvent<'channelUpdate'> {
       logger.info(
         `✅ Successfully notified: ${guild.name} (${guild.id}) -> ${notifyChannel.name} (${notifyChannel.id})`
       )
-    } catch (error) {
-      if ((error as Error).message === 'Already loading.') {
+    } catch (err) {
+      if ((err as Error).message === 'Already loading.') {
         return
       }
-      if ((error as Error).name === 'AbortError') {
+      if ((err as Error).name === 'AbortError') {
         logger.info(
           `❌ Abort load positions: ${guild.name} (${guild.id}) -> ${channelName} (${newChannel.id})`
         )
         return
       }
 
-      logger.error('❌ Failed to load positions: ', error as Error)
+      logger.error('❌ Failed to load positions: ', err as Error)
     }
   }
 }

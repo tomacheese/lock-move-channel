@@ -70,8 +70,8 @@ export class LoadCommand implements BaseCommand {
         },
         false
       )
-    } catch (error) {
-      if ((error as Error).name === 'AbortError') {
+    } catch (err) {
+      if ((err as Error).name === 'AbortError') {
         await discord.sendError(interaction, {
           title: '❌ チャンネル並び替え中止',
           description: 'チャンネル並び替えが中止されました。',
@@ -79,7 +79,7 @@ export class LoadCommand implements BaseCommand {
         return
       }
 
-      throw error
+      throw err
     }
   }
 }

@@ -33,9 +33,9 @@ export class PositionLoadManager {
           this.loadController.delete(id)
           resolve(changes)
         })
-        .catch((error: unknown) => {
+        .catch((err: unknown) => {
           this.loadController.delete(id)
-          reject(error as Error)
+          reject(err as Error)
         })
 
       abortController.signal.addEventListener(

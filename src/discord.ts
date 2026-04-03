@@ -49,13 +49,13 @@ export class Discord {
       partials: [Partials.Channel, Partials.GuildMember],
     })
     this.client.on('ready', () => {
-      this.onReady().catch((error: unknown) => {
-        logger.error('❌ Failed to run onReady', error as Error)
+      this.onReady().catch((err: unknown) => {
+        logger.error('❌ Failed to run onReady', err as Error)
       })
     })
     this.onInteractionFunction = (interaction) => {
-      this.onInteractionCreate(interaction).catch((error: unknown) => {
-        logger.error('❌ Failed to run onInteractionCreate', error as Error)
+      this.onInteractionCreate(interaction).catch((err: unknown) => {
+        logger.error('❌ Failed to run onInteractionCreate', err as Error)
       })
     }
     this.client.on('interactionCreate', this.onInteractionFunction)
@@ -70,9 +70,9 @@ export class Discord {
       event.register()
     }
 
-    this.client.login(config.get('discord').token).catch((error: unknown) => {
+    this.client.login(config.get('discord').token).catch((err: unknown) => {
       const logger = Logger.configure('Discord.constructor')
-      logger.error('Failed to login to Discord.', error as Error)
+      logger.error('Failed to login to Discord.', err as Error)
     })
     this.rest = new REST().setToken(config.get('discord').token)
 
@@ -105,8 +105,8 @@ export class Discord {
         this.client.off('interactionCreate', this.onInteractionFunction)
         this.client.on('interactionCreate', this.onInteractionFunction)
 
-        this.updateAllGuildCommands().catch((error: unknown) => {
-          logger.error('❌ Failed to update commands', error as Error)
+        this.updateAllGuildCommands().catch((err: unknown) => {
+          logger.error('❌ Failed to update commands', err as Error)
         })
       },
       1000 * 60 * 60
