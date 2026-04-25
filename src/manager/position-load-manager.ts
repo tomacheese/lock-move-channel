@@ -35,7 +35,7 @@ export class PositionLoadManager {
         })
         .catch((error: unknown) => {
           this.loadController.delete(id)
-          reject(error as Error)
+          reject(error instanceof Error ? error : new Error(String(error)))
         })
 
       abortController.signal.addEventListener(
