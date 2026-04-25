@@ -14,6 +14,12 @@ export class PositionLoadManager {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
+  /**
+   * 指定されたサーバーのチャンネル位置を復元する
+   *
+   * @param server - 復元対象の LockMoveChannelServer インスタンス
+   * @returns 変更されたチャンネル位置の配列を解決する Promise
+   */
   load(server: LockMoveChannelServer): Promise<ChangedChannelPosition[]> {
     return new Promise((resolve, reject) => {
       const id = server.id
