@@ -1,69 +1,29 @@
-# GitHub Copilot Instructions
+# GitHub Copilot コードレビュー指示
 
-## プロジェクト概要
-- **目的**: Discord チャンネルの移動を検出し、自動的に元の位置に戻す
-- **主な機能**:
-  - 複数の Discord サーバーでのチャンネル順序の固定
-  - 一時的なロック解除機能
-  - ロック中でもチャンネルの作成・削除を許容
-  - Docker Compose による動作サポート
-- **対象ユーザー**: Discord サーバー管理者
+このファイルは GitHub Copilot のコードレビュー機能向けに、このリポジトリのレビュー基準を定義する。
+開発作業手順は `CLAUDE.md` を参照（このファイルでは重複させない）。
 
-## 共通ルール
-- 会話は日本語で行う。
-- PR とコミットは [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) に従う。
-  - 形式: `<type>(<scope>): <description>`
-  - `<description>` は日本語で記載する。
-- 日本語と英数字の間には半角スペースを入れる。
-- コード内のコメントは日本語で記載する。
-- エラーメッセージは英語で記載する。
+## リポジトリの前提
 
-## 技術スタック
-- **言語**: TypeScript (Node.js v24+)
-- **ライブラリ**: discord.js, @book000/node-utils
-- **パッケージマネージャー**: pnpm
+- Discord チャンネルの移動を検出し、元の位置へ自動復元する Discord Bot（TypeScript / Node.js 24 / discord.js / @book000/node-utils）。
+- 実行は `tsx` で直接行い、配布ビルドは `ncc`（`pnpm package`）。エントリは `src/main.ts`。
 
-## コーディング規約
-- **TypeScript**: `skipLibCheck` の使用は禁止。
-- **ドキュメント**: 関数やインターフェースには JSDoc 等を日本語で記載する。
-- **命名規則**: プロジェクトの既存の命名規則（camelCase 等）に従う。
-- **フォーマット**: Prettier および ESLint の設定に従う。
+## 自動強制される規約（レビューで重複指摘しない）
 
-## 開発コマンド
-```bash
-# 依存関係のインストール
-pnpm install
+- フォーマットは Prettier（`.prettierrc.yml`）で強制: セミコロンなし、シングルクォート、`printWidth: 80`、`trailingComma: es5`、`arrowParens: always`、`endOfLine: lf`。整形済みコードにスタイル指摘を付けない。
+- Lint は `@book000/eslint-config`（`eslint.config.mjs`）で強制。CI（`pnpm lint` = prettier + eslint + tsc）で検査される。
 
-# 開発（ホットリロードあり）
-pnpm dev
+## レビューで重点的に確認する点
 
-# 実行
-pnpm start
+- **言語規約**: コード内コメントと docstring は日本語。ユーザー向け／ログのエラーメッセージは英語。日本語と英数字の間には半角スペース。既存のエラーメッセージが絵文字付きなら、新規も先頭に一文字絵文字を付ける。
+- **型安全性**: `skipLibCheck` を有効化して型エラーを回避するのは禁止。`any` への安易な逃避や不要な型アサーションを指摘する。
+- **機密情報**: Discord トークンは `data/config.json`（環境変数 `CONFIG_PATH` / `CONFIG_FILE` でパス上書き可）で管理される。トークン等の認証情報をコード・ログ・コミットに含めていないか確認する。
+- **Discord API**: レート制限・権限（intents / permissions）の考慮漏れ、破壊的操作（チャンネル並び替え・削除）の副作用に注意する。
+- **設定スキーマ**: 設定項目を追加・変更した場合、`schema/Configuration.json` と `src/config.ts` の `ConfigInterface` が整合しているか、必要なら `README.md` も更新されているか確認する。
+- **コマンド登録**: スラッシュコマンドを追加した場合、`src/commands/` に実装し `src/discord.ts` で import して `Discord.routes` に登録されているか確認する。
 
-# Lint 実行
-pnpm lint
+## フラグすべきでない既知パターン（誤検知回避）
 
-# コードの自動修正
-pnpm fix
-
-# コンパイル
-pnpm compile
-
-# パッケージング（ncc を使用）
-pnpm package
-```
-
-## テスト方針
-- 現在、明示的なテストコードは存在しないが、必要に応じて追加する。
-
-## セキュリティ / 機密情報
-- Discord トークン等の機密情報は `data/config.json` で管理し、Git にコミットしない。
-- ログに個人情報や認証情報を出力しない。
-
-## ドキュメント更新
-- `README.md`: 機能追加や設定方法の変更時に更新。
-- `schema/Configuration.json`: 設定ファイルのスキーマ変更時に更新。
-
-## リポジトリ固有
-- 設定は `data/config.json` または環境変数 `CONFIG_FILE` / `CONFIG_PATH` で指定される。
-- `ncc` を使用して一つの実行ファイルにビルドされる。
+- テストコードは現状存在しない。テスト未追加それ自体をブロッキング指摘にしない（重要ロジックへの追加提案は可）。
+- `tsx` による直接実行が正規の実行方法。開発時にビルド成果物が無いことを不備として指摘しない。
+- ロギングと設定は `@book000/node-utils` の `Logger` / `ConfigFramework` を利用する既存方針。独自実装への置き換えを一律に推奨しない。
