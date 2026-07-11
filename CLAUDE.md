@@ -117,6 +117,6 @@ pnpm package
 - `.gitignore` で指定されたファイルを尊重する
 
 ## リポジトリ固有
-- 設定は `data/config.json` で管理する（`src/main.ts` で読み込む）。サーバーごとのデータは `data/servers/` 配下に永続化される
+- 設定は `data/config.json` で管理する（`src/main.ts` で読み込む）。環境変数 `CONFIG_PATH` / `CONFIG_FILE` を設定するとその値が設定ファイルのパスとして優先される（`@book000/node-utils` の `ConfigFramework`）。サーバーごとのデータは `data/servers/` 配下に永続化される（環境変数 `BASE_SERVER_DIR` で変更可能）
 - Docker 環境での動作を考慮し、データの永続化パス（`data/`）に留意する
 - Discord API のレート制限を考慮した実装を行う
