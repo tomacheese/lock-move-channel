@@ -41,10 +41,8 @@ Claude Code の作業方針とプロジェクト固有ルールを定義しま�
 - TypeScript: `skipLibCheck` を有効にしてエラーを回避することは禁止
 - docstring: 関数やインターフェースには日本語で docstring を記載・更新する
 
-## 相談ルール
-- Codex CLI: 実装レビュー、局所設計、整合性確認
-- Gemini CLI: 外部仕様、最新情報確認
-- 指摘への対応：信頼度スコア 50 以上の指摘には必ず対応する（黙殺禁止）
+## レビュー指摘への対応
+- 信頼度スコア 50 以上の指摘には必ず対応する（黙殺禁止）
 
 ## 開発コマンド
 ```bash
@@ -57,13 +55,16 @@ pnpm dev
 # 実行
 pnpm start
 
-# Lint / 型チェック
+# Lint / 型チェック（prettier + eslint + tsc）
 pnpm lint
 
 # 自動修正
 pnpm fix
 
-# ビルド / パッケージング
+# 型チェックのみ（tsc -p .）
+pnpm compile
+
+# ビルド / パッケージング（clean → compile → ncc）
 pnpm package
 ```
 
@@ -110,6 +111,12 @@ pnpm package
 3. GitHub Actions の結果を確認する
 4. Copilot レビューやコードレビューの指摘に対応する
 
+## セキュリティ / 機密情報
+- Discord トークン等の認証情報は `data/config.json` で管理し、Git にコミットしない
+- ログに機密情報（個人情報、トークン等）を出力しない
+- `.gitignore` で指定されたファイルを尊重する
+
 ## リポジトリ固有
-- Docker 環境での動作を考慮し、設定ファイルやデータの永続化パス（`data/`）に留意する
+- 設定は `data/config.json` で管理する（`src/main.ts` で読み込む）。サーバーごとのデータは `data/servers/` 配下に永続化される
+- Docker 環境での動作を考慮し、データの永続化パス（`data/`）に留意する
 - Discord API のレート制限を考慮した実装を行う
