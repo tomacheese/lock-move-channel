@@ -16,9 +16,7 @@ import { LockMoveChannelServer } from '@/server'
  */
 export class SaveCommand implements BaseCommand {
   definition():
-    | SlashCommandSubcommandBuilder
-    | SlashCommandSubcommandGroupBuilder
-    | null {
+    SlashCommandSubcommandBuilder | SlashCommandSubcommandGroupBuilder | null {
     return new SlashCommandSubcommandBuilder()
       .setName('save')
       .setDescription('チャンネル順番を保存します。')

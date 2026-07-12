@@ -16,9 +16,7 @@ import { LockMoveChannelServer } from '@/server'
  */
 export class LoadCommand implements BaseCommand {
   definition():
-    | SlashCommandSubcommandBuilder
-    | SlashCommandSubcommandGroupBuilder
-    | null {
+    SlashCommandSubcommandBuilder | SlashCommandSubcommandGroupBuilder | null {
     return new SlashCommandSubcommandBuilder()
       .setName('load')
       .setDescription('チャンネル順番を保存した内容に従って並び替えます。')
