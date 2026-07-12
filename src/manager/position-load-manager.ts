@@ -34,15 +34,16 @@ export class PositionLoadManager {
 
       const abortController = new AbortController()
       this.loadController.set(id, abortController)
-      this.run(server)
-        .then((changes) => {
+      ;(async () => {
+        try {
+          const changes = await this.run(server)
           this.loadController.delete(id)
           resolve(changes)
-        })
-        .catch((error: unknown) => {
+        } catch (error) {
           this.loadController.delete(id)
           reject(error instanceof Error ? error : new Error(String(error)))
-        })
+        }
+      })()
 
       abortController.signal.addEventListener(
         'abort',

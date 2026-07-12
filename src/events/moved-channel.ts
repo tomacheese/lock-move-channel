@@ -16,10 +16,10 @@ export class MovedChannelEvent extends BaseDiscordEvent<'channelUpdate'> {
     oldChannel: DMChannel | NonThreadGuildBasedChannel,
     newChannel: DMChannel | NonThreadGuildBasedChannel
   ): Promise<void> {
-    const logger = Logger.configure(this.constructor.name + '.execute')
     if (oldChannel.isDMBased() || newChannel.isDMBased()) {
       return
     }
+    const logger = Logger.configure(this.constructor.name + '.execute')
 
     const guild = newChannel.guild
     const server = new LockMoveChannelServer(guild)

@@ -73,6 +73,8 @@ export class UnlockCommand implements BaseCommand {
     })
 
     const autoLockManager = AutoLockManager.instance
-    autoLockManager.set(guild, discord, interaction)
+    ;(async () => {
+      await autoLockManager.set(guild, discord, interaction)
+    })()
   }
 }

@@ -14,9 +14,13 @@ export abstract class BaseDiscordEvent<T extends keyof ClientEvents> {
   register(): void {
     const logger = Logger.configure('BaseDiscordEvent.register')
     this.discord.client.on(this.eventName, (...eventArguments) => {
-      this.execute(...eventArguments).catch((error: unknown) => {
-        logger.error(`❌ Failed to run ${this.eventName}`, error as Error)
-      })
+      ;(async () => {
+        try {
+          await this.execute(...eventArguments)
+        } catch (error) {
+          logger.error(`❌ Failed to run ${this.eventName}`, error as Error)
+        }
+      })()
     })
   }
 

@@ -12,10 +12,10 @@ export class DeletedChannelEvent extends BaseDiscordEvent<'channelDelete'> {
   async execute(
     channel: DMChannel | NonThreadGuildBasedChannel
   ): Promise<void> {
-    const logger = Logger.configure(this.constructor.name + '.execute')
     if (channel.isDMBased()) {
       return
     }
+    const logger = Logger.configure(this.constructor.name + '.execute')
     const guild = channel.guild
 
     const server = new LockMoveChannelServer(guild)

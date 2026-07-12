@@ -16,59 +16,54 @@ export class AutoLockManager {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
-  set(
+  async set(
     guild: Guild,
     discord: Discord,
     interaction: ChatInputCommandInteraction
-  ): void {
+  ): Promise<void> {
     const id = guild.id
 
     if (this.lockController.has(id)) this.cancel(guild)
 
     const abortController = new AbortController()
     this.lockController.set(id, abortController)
-    setTimeout(this.seconds * 1000, null, { signal: abortController.signal })
-      .then(() => {
-        this.lockController.delete(id)
-        const server = new LockMoveChannelServer(guild)
-        server.setLocked(true)
-        server
-          .savePositions()
-          .then(() => {
-            return discord.sendSuccess(interaction, {
-              title: '🔐 再ロック完了',
-              description:
-                '5分経過したため、チャンネル並び替えをロックしました。',
-            })
-          })
-          .then(() => {
-            const logger = Logger.configure(this.constructor.name + '.set')
-            logger.info(`✅ Auto Locked: ${guild.name} (${guild.id})`)
-          })
-          .catch((error: unknown) => {
-            const logger = Logger.configure(this.constructor.name + '.set')
-            logger.error('❌ Auto Lock Error', error as Error)
-          })
+    try {
+      await setTimeout(this.seconds * 1000, null, {
+        signal: abortController.signal,
       })
-      .catch((error: unknown) => {
+      this.lockController.delete(id)
+      const server = new LockMoveChannelServer(guild)
+      server.setLocked(true)
+      try {
+        await server.savePositions()
+        await discord.sendSuccess(interaction, {
+          title: '🔐 再ロック完了',
+          description: '5分経過したため、チャンネル並び替えをロックしました。',
+        })
+        const logger = Logger.configure(this.constructor.name + '.set')
+        logger.info(`✅ Auto Locked: ${guild.name} (${guild.id})`)
+      } catch (error) {
         const logger = Logger.configure(this.constructor.name + '.set')
         logger.error('❌ Auto Lock Error', error as Error)
+      }
+    } catch (error) {
+      const logger = Logger.configure(this.constructor.name + '.set')
+      logger.error('❌ Auto Lock Error', error as Error)
 
-        if ((error as Error).name === 'AbortError') {
-          return discord.sendError(interaction, {
-            title: '❌ 再ロックに失敗',
-            description: '再ロック処理が中断されました。',
-          })
-        }
-
-        return discord.sendError(interaction, {
+      if ((error as Error).name === 'AbortError') {
+        await discord.sendError(interaction, {
+          title: '❌ 再ロックに失敗',
+          description: '再ロック処理が中断されました。',
+        })
+      } else {
+        await discord.sendError(interaction, {
           title: '❌ 再ロックに失敗',
           description: `エラーが発生したため、再ロック処理に失敗しました。\n\nErrorName: ${(error as Error).name}\nErrorMessage: ${(error as Error).message}`,
         })
-      })
-      .finally(() => {
-        this.lockController.delete(id)
-      })
+      }
+    } finally {
+      this.lockController.delete(id)
+    }
   }
 
   cancel(guild: Guild): void {
