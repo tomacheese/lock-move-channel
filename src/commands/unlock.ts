@@ -17,9 +17,7 @@ import { AutoLockManager } from '@/manager/auto-lock-manager'
  */
 export class UnlockCommand implements BaseCommand {
   definition():
-    | SlashCommandSubcommandBuilder
-    | SlashCommandSubcommandGroupBuilder
-    | null {
+    SlashCommandSubcommandBuilder | SlashCommandSubcommandGroupBuilder | null {
     return new SlashCommandSubcommandBuilder()
       .setName('unlock')
       .setDescription('チャンネル並び替えのロックを解除します。')
@@ -75,6 +73,8 @@ export class UnlockCommand implements BaseCommand {
     })
 
     const autoLockManager = AutoLockManager.instance
-    autoLockManager.set(guild, discord, interaction)
+    ;(async () => {
+      await autoLockManager.set(guild, discord, interaction)
+    })()
   }
 }

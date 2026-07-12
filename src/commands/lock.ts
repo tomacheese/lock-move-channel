@@ -17,9 +17,7 @@ import { AutoLockManager } from '@/manager/auto-lock-manager'
  */
 export class LockCommand implements BaseCommand {
   definition():
-    | SlashCommandSubcommandBuilder
-    | SlashCommandSubcommandGroupBuilder
-    | null {
+    SlashCommandSubcommandBuilder | SlashCommandSubcommandGroupBuilder | null {
     return new SlashCommandSubcommandBuilder()
       .setName('lock')
       .setDescription('チャンネル並び替えをロックします。')
