@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@book000/eslint-config':
-        specifier: 1.16.57
-        version: 1.16.57(eslint@10.10.0)(typescript@6.0.3)
+        specifier: 1.16.60
+        version: 1.16.60(eslint@10.10.0)(typescript@6.0.3)
       '@book000/node-utils':
         specifier: 1.25.92
         version: 1.25.92(@opentelemetry/core@2.11.0(@opentelemetry/api@1.9.1))
@@ -59,10 +59,10 @@ importers:
 
 packages:
 
-  '@book000/eslint-config@1.16.57':
-    resolution: {integrity: sha512-VLRzq/fR/4RWA4ktYAoAP/FeVXg4meec0QIOITKY+dT2u6Oe0m4fuaVlZEDwFtnybUtAGV2U9JllZjlK95Y3Vw==}
+  '@book000/eslint-config@1.16.60':
+    resolution: {integrity: sha512-0U0+4Kq6H8pU9LvIOOcpM35g9In2gaMnQ2HZI80zBP7HoulC7MLYR4dzntspSEojM3WY3ltYxnQVcuxRiE9qkA==}
     peerDependencies:
-      eslint: 10.9.1
+      eslint: 10.10.0
 
   '@book000/node-utils@1.25.92':
     resolution: {integrity: sha512-axuTwlCotTj0BTxQ/KnOwC0bI45dbbidwOVYo91DM9LdEstz9vz1yQGPbG1vKYNFXPOAFr9S+uDyWWxT33WHoQ==}
@@ -2023,7 +2023,7 @@ packages:
 
 snapshots:
 
-  '@book000/eslint-config@1.16.57(eslint@10.10.0)(typescript@6.0.3)':
+  '@book000/eslint-config@1.16.60(eslint@10.10.0)(typescript@6.0.3)':
     dependencies:
       '@typescript-eslint/parser': 8.69.0(eslint@10.10.0)(typescript@6.0.3)
       eslint: 10.10.0
