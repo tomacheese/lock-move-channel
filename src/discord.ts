@@ -158,18 +158,18 @@ export class Discord {
               return interaction.user.id === permission.identifier
             }
             case 'ROLE': {
-              return interaction.guild ? (
-                interaction.guild.members
-                  .resolve(interaction.user)
-                  ?.roles.cache.has(permission.identifier) ?? false
-              ) : false;
+              return interaction.guild
+                ? (interaction.guild.members
+                    .resolve(interaction.user)
+                    ?.roles.cache.has(permission.identifier) ?? false)
+                : false
             }
             case 'PERMISSION': {
-              return interaction.guild ? (
-                interaction.guild.members
-                  .resolve(interaction.user)
-                  ?.permissions.has(permission.identifier) ?? false
-              ) : false;
+              return interaction.guild
+                ? (interaction.guild.members
+                    .resolve(interaction.user)
+                    ?.permissions.has(permission.identifier) ?? false)
+                : false
             }
           }
         }
