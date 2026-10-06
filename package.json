@@ -30,7 +30,7 @@
     "package": "run-z clean compile packing"
   },
   "devDependencies": {
-    "@book000/eslint-config": "1.16.83",
+    "@book000/eslint-config": "1.16.84",
     "@book000/node-utils": "1.25.142",
     "@types/node": "24.19.1",
     "@vercel/ncc": "0.45.0",
