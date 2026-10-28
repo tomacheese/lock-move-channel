@@ -4,4 +4,4 @@ minimumReleaseAgeExclude:
   - '@book000/*'
 # @discordjs/builders が @sapphire/shapeshift ^4 に固定しているが、@types/node 26 では shapeshift 4 の型が壊れるため ^5 に上書きする。@discordjs/builders が shapeshift 5 に対応したら削除する
 overrides:
-  '@sapphire/shapeshift': ^5
+  '@sapphire/shapeshift': 5.0.0
