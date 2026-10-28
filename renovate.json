@@ -2,7 +2,7 @@
   "extends": ["github>book000/templates//renovate/base-public"],
   "packageRules": [
     {
-      "description": "ランタイムは Node.js 24 (Dockerfile / .node-version) のため @types/node は v24 系に固定する。@sapphire/shapeshift 5 が @types/node 26 で削除された util.InspectOptionsStylized を import しており型チェックが失敗する。ランタイムを Node.js 26 に上げる際、または @sapphire/shapeshift 5 が @types/node 26 に対応した際に解除する",
+      "description": "ランタイムは Node.js 24 (Dockerfile / .node-version) のため @types/node は v24 系に固定する。@sapphire/shapeshift (4.0.0 時点) が @types/node 26 で削除された util.InspectOptionsStylized を import しており型チェックが失敗する。ランタイムを Node.js 26 に上げる際、または @sapphire/shapeshift が @types/node 26 に対応した際に解除する",
       "matchPackageNames": ["@types/node"],
       "allowedVersions": "<25"
     }
