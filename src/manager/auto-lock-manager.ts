@@ -5,7 +5,7 @@ import { Logger } from '@book000/node-utils'
 import { Discord } from '@/discord'
 
 /**
- * 自動ロックを管理する
+ * Manages the automatic re-lock timer (a fixed delay after unlock).
  */
 export class AutoLockManager {
   private static readonly _instance = new AutoLockManager()

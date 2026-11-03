@@ -4,7 +4,7 @@ import { Logger } from '@book000/node-utils'
 import { DMChannel, NonThreadGuildBasedChannel } from 'discord.js'
 
 /**
- * チャンネルが削除されたとき、チャンネル並び順を保存する
+ * Saves the channel order when a channel is deleted
  */
 export class DeletedChannelEvent extends BaseDiscordEvent<'channelDelete'> {
   readonly eventName = 'channelDelete'

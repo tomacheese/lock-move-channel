@@ -5,9 +5,9 @@ import { APIEmbed, DMChannel, NonThreadGuildBasedChannel } from 'discord.js'
 import { MovedChannelManager } from '@/manager/moved-channel-manager'
 
 /**
- * チャンネルが削除されたとき、以下の処理を行う
- * - サーバでチャンネル並び替えがロックされている場合、並び順をもとに戻す
- * - チャンネル並び替えがロックされていない場合、並び順を保存する
+ * On channel update:
+ * - if reordering is locked, restores the saved order
+ * - if not locked, saves the new order
  */
 export class MovedChannelEvent extends BaseDiscordEvent<'channelUpdate'> {
   readonly eventName = 'channelUpdate'
@@ -38,7 +38,6 @@ export class MovedChannelEvent extends BaseDiscordEvent<'channelUpdate'> {
     }
 
     if (!server.isLocked()) {
-      // ロックされていない場合、並び順を保存する
       await server.savePositions()
       logger.info(
         `✅ Moved channel[Unlocked]: ${guild.name} (${guild.id}) -> ${newChannel.name} (${newChannel.id}). Saved positions.`
@@ -46,11 +45,9 @@ export class MovedChannelEvent extends BaseDiscordEvent<'channelUpdate'> {
       return
     }
 
-    // ロックされている場合、並び順をもとに戻す
     logger.info(
       `⏩ Moved channel[Locked]: ${guild.name} (${guild.id}) -> ${channelName} (${newChannel.id}). ${oldPosition} -> ${newPosition} (${oldRawPosition} -> ${newRawPosition})`
     )
-    // 並び順をもとに戻したチャンネルを管理する
     const movedChannelManager = MovedChannelManager.instance
     movedChannelManager.add(guild, {
       channel: newChannel,
@@ -71,7 +68,6 @@ export class MovedChannelEvent extends BaseDiscordEvent<'channelUpdate'> {
         `✅ Successfully load positions: ${guild.name} (${guild.id}) -> ${changes.length} changes`
       )
 
-      // 並び順をもとに戻したチャンネルについて、通知する
       const notifyChannel = await server.getNotifyChannel()
       if (!notifyChannel) {
         logger.info(
@@ -80,7 +76,6 @@ export class MovedChannelEvent extends BaseDiscordEvent<'channelUpdate'> {
         return
       }
 
-      // 10件だけ表示する
       const fields = changes
         .map((change) => {
           return {

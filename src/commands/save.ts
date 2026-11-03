@@ -9,11 +9,6 @@ import { Discord } from '@/discord'
 import { Logger } from '@book000/node-utils'
 import { LockMoveChannelServer } from '@/server'
 
-/**
- * lock-move-channel save
- *
- * チャンネル順番を保存する。
- */
 export class SaveCommand implements BaseCommand {
   definition():
     SlashCommandSubcommandBuilder | SlashCommandSubcommandGroupBuilder | null {

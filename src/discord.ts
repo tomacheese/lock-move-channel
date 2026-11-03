@@ -110,7 +110,7 @@ export class Discord {
 
     await this.updateAllGuildCommands()
 
-    // 1時間ごとに interactionCreate を再登録する
+    // Re-register the interactionCreate handler every hour
     setInterval(
       () => {
         const logger = Logger.configure('Discord.onReady.setInterval')

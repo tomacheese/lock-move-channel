@@ -12,7 +12,7 @@ import { LockMoveChannelServer } from '@/server'
 /**
  * lock-move-channel unregister
  *
- * このサーバを対象サーバから外す。
+ * Removes this server from the managed servers.
  */
 export class UnregisterCommand implements BaseCommand {
   definition():

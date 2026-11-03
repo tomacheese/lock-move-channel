@@ -13,7 +13,7 @@ import { AutoLockManager } from '@/manager/auto-lock-manager'
 /**
  * lock-move-channel unlock
  *
- * チャンネル並び替えのロックを解除する。
+ * Unlocks channel reordering. It is locked again automatically after a fixed delay (see AutoLockManager).
  */
 export class UnlockCommand implements BaseCommand {
   definition():
