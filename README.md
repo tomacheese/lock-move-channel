@@ -5,7 +5,7 @@ Detects and undoes Discord channel moves.
 ## Requirements
 
 - Native Node.js or Docker
-- Vaild Discord bot & token
+- A valid Discord bot and token
 
 ## Features
 
@@ -38,15 +38,21 @@ You can then refer to the [configuration section](#configuration) to create a co
 
 ### Native Node.js
 
-If you are running in a Node.js environment, Node.js v20 is recommended.
+Use the Node.js version listed in `.node-version` and pnpm.
 
-Download and extract `lock-move-channel_vX.Y.Z.zip` from the [release page](https://github.com/tomacheese/lock-move-channel/releases) in the latest release.  
-After that, you can start it with `node index.js` after creating a configuration file with reference to [Configuration section](#configuration).
+Clone the repository, create a configuration file with reference to the [Configuration section](#configuration), then run:
+
+```bash
+pnpm install
+pnpm start
+```
 
 ## Configuration
 
 The configuration file `data/config.json` is used by default.  
-If the environment variable `CONFIG_FILE` or `CONFIG_PATH` is set, the specified value is taken as the path to the configuration file.
+If the environment variable `CONFIG_PATH` or `CONFIG_FILE` is set and the file exists, it is used instead.
+
+Per-server data is stored in `data/servers/` (override with `BASE_SERVER_DIR`).
 
 See here for the JSON Schema of the configuration file: [schema/Configuration.json](schema/Configuration.json)
 

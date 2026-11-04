@@ -1,29 +1,22 @@
-# GitHub Copilot コードレビュー指示
+# Copilot review instructions
 
-このファイルは GitHub Copilot のコードレビュー機能向けに、このリポジトリのレビュー基準を定義する。
-開発作業手順は `CLAUDE.md` を参照（このファイルでは重複させない）。
+Development rules, commands and architecture are in `AGENTS.md`; do not duplicate them here.
 
-## リポジトリの前提
+## Already enforced (do not flag)
 
-- Discord チャンネルの移動を検出し、元の位置へ自動復元する Discord Bot（TypeScript / Node.js 24 / discord.js / @book000/node-utils）。
-- 実行は `tsx` で直接行い、配布ビルドは `ncc`（`pnpm package`）。エントリは `src/main.ts`。
+- Formatting is enforced by Prettier (`.prettierrc.yml`) and linting by `@book000/eslint-config`; CI runs `pnpm lint` (prettier + eslint + tsc).
 
-## 自動強制される規約（レビューで重複指摘しない）
+## Review focus
 
-- フォーマットは Prettier（`.prettierrc.yml`）で強制: セミコロンなし、シングルクォート、`printWidth: 80`、`trailingComma: es5`、`arrowParens: always`、`endOfLine: lf`。整形済みコードにスタイル指摘を付けない。
-- Lint は `@book000/eslint-config`（`eslint.config.mjs`）で強制。CI（`pnpm lint` = prettier + eslint + tsc）で検査される。
+- Language: comments and docstrings in English; error messages in English (user-facing Discord text may be Japanese).
+- Type safety: `skipLibCheck` must not be enabled to hide type errors; flag needless `any` or type assertions.
+- Secrets: the Discord token must not appear in code, logs or commits.
+- Discord API: rate limits, intents/permissions, and side effects of destructive operations (reordering, deleting channels).
+- Config schema: `schema/Configuration.json` and `ConfigInterface` in `src/config.ts` stay consistent; update `README.md` when needed.
+- Commands: a new slash command lives in `src/commands/` and is registered in `Discord.routes` in `src/discord.ts`.
 
-## レビューで重点的に確認する点
+## Known patterns (do not flag)
 
-- **言語規約**: コード内コメントと docstring は日本語。ユーザー向け／ログのエラーメッセージは英語。日本語と英数字の間には半角スペース。既存のエラーメッセージが絵文字付きなら、新規も先頭に一文字絵文字を付ける。
-- **型安全性**: `skipLibCheck` を有効化して型エラーを回避するのは禁止。`any` への安易な逃避や不要な型アサーションを指摘する。
-- **機密情報**: Discord トークンは `data/config.json`（環境変数 `CONFIG_PATH` / `CONFIG_FILE` でパス上書き可）で管理される。トークン等の認証情報をコード・ログ・コミットに含めていないか確認する。
-- **Discord API**: レート制限・権限（intents / permissions）の考慮漏れ、破壊的操作（チャンネル並び替え・削除）の副作用に注意する。
-- **設定スキーマ**: 設定項目を追加・変更した場合、`schema/Configuration.json` と `src/config.ts` の `ConfigInterface` が整合しているか、必要なら `README.md` も更新されているか確認する。
-- **コマンド登録**: スラッシュコマンドを追加した場合、`src/commands/` に実装し `src/discord.ts` で import して `Discord.routes` に登録されているか確認する。
-
-## フラグすべきでない既知パターン（誤検知回避）
-
-- テストコードは現状存在しない。テスト未追加それ自体をブロッキング指摘にしない（重要ロジックへの追加提案は可）。
-- `tsx` による直接実行が正規の実行方法。開発時にビルド成果物が無いことを不備として指摘しない。
-- ロギングと設定は `@book000/node-utils` の `Logger` / `ConfigFramework` を利用する既存方針。独自実装への置き換えを一律に推奨しない。
+- There are no tests; absence of tests alone is not blocking.
+- Running directly with `tsx` is the intended way; a missing build output in development is not a defect.
+- `Logger` / `ConfigFramework` from `@book000/node-utils` are the intended logging/config approach.

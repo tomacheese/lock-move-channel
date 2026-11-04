@@ -25,18 +25,18 @@ interface PermissionPermission {
 export type Permission = UserPermission | RolePermission | PermissionPermission
 
 export abstract class BaseCommand {
-  /** 定義: スラッシュサブコマンド */
+  /** Slash subcommand definition */
   abstract definition(
     guild: BaseGuild
   ): SlashCommandSubcommandBuilder | SlashCommandSubcommandGroupBuilder | null
 
-  /** 定義: 各サーバへの登録条件 */
+  /** Whether the command is registered for the given guild */
   abstract conditions(guild: BaseGuild): boolean
 
-  /** 権限: サブコマンドの実行に必要なユーザー・ロール・パーミッション。NULLが指定された場合はすべて許可 */
+  /** Users, roles or permissions required to run the subcommand. null allows everyone */
   abstract get permissions(): Permission[] | null
 
-  /** 実行: サブコマンドの実行定義 */
+  /** Subcommand handler */
   abstract execute(
     discord: Discord,
     interaction: ChatInputCommandInteraction

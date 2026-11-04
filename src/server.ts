@@ -25,7 +25,7 @@ interface LockMoveChannelServerData {
 }
 
 /**
- * lock-move-channel の対象サーバを表すクラス
+ * A server managed by lock-move-channel.
  */
 export class LockMoveChannelServer {
   private readonly path: string
@@ -45,9 +45,9 @@ export class LockMoveChannelServer {
   }
 
   /**
-   * サーバを登録する
+   * Registers the server and saves the current channel positions.
    *
-   * @param channel 通知用チャンネル
+   * @param channel Channel that receives notifications
    */
   async register(channel: GuildBasedChannel & TextBasedChannel): Promise<void> {
     if (fs.existsSync(this.path)) {
@@ -68,7 +68,7 @@ export class LockMoveChannelServer {
   }
 
   /**
-   * サーバの登録を解除する
+   * Unregisters the server by deleting its data file.
    */
   unregister(): void {
     if (!fs.existsSync(this.path)) {
@@ -79,9 +79,9 @@ export class LockMoveChannelServer {
   }
 
   /**
-   * チャンネル並び替えのロック状態を変更する
+   * Changes the channel reordering lock state.
    *
-   * @param isLocked ロックするかどうか
+   * @param isLocked Whether to lock
    */
   setLocked(isLocked: boolean): void {
     if (!fs.existsSync(this.path)) {

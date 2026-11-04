@@ -10,11 +10,6 @@ import { Logger } from '@book000/node-utils'
 import { LockMoveChannelServer } from '@/server'
 import { AutoLockManager } from '@/manager/auto-lock-manager'
 
-/**
- * lock-move-channel lock
- *
- * チャンネル並び替えをロックする。
- */
 export class LockCommand implements BaseCommand {
   definition():
     SlashCommandSubcommandBuilder | SlashCommandSubcommandGroupBuilder | null {

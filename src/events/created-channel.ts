@@ -3,9 +3,6 @@ import { BaseDiscordEvent } from '.'
 import { Logger } from '@book000/node-utils'
 import { NonThreadGuildBasedChannel } from 'discord.js'
 
-/**
- * チャンネルが作成されたとき、チャンネル並び順を保存する
- */
 export class CreatedChannelEvent extends BaseDiscordEvent<'channelCreate'> {
   readonly eventName = 'channelCreate'
 

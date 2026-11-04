@@ -10,7 +10,7 @@ export interface ChangedChannelPosition {
 }
 
 /**
- * 移動されたチャンネルを管理する
+ * Keeps the channels moved (and reverted) per guild, used for notifications.
  */
 export class MovedChannelManager {
   private static readonly _instance = new MovedChannelManager()

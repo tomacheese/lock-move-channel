@@ -5,7 +5,7 @@ import {
 } from './moved-channel-manager'
 
 /**
- * チャンネル順番復元中の状態を管理する
+ * Tracks in-progress channel position restores per guild.
  */
 export class PositionLoadManager {
   private static readonly _instance = new PositionLoadManager()
@@ -15,10 +15,8 @@ export class PositionLoadManager {
   private constructor() {}
 
   /**
-   * 指定されたサーバーのチャンネル位置を復元する
-   *
-   * @param server - 復元対象の LockMoveChannelServer インスタンス
-   * @returns 変更されたチャンネル位置の配列を解決する Promise
+   * Restores the saved channel positions of the given server.
+   * Rejects if a restore is already running for it.
    */
   load(server: LockMoveChannelServer): Promise<ChangedChannelPosition[]> {
     return new Promise((resolve, reject) => {

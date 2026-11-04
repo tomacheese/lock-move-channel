@@ -15,7 +15,7 @@ import { Logger } from '@book000/node-utils'
 /**
  * lock-move-channel register
  *
- * このサーバを対象サーバに設定する。
+ * Adds this server to the managed servers.
  */
 export class RegisterCommand implements BaseCommand {
   definition():

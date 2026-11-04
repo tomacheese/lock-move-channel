@@ -3,7 +3,7 @@ import { BaseDiscordEvent } from '.'
 import { Logger } from '@book000/node-utils'
 
 /**
- * アプリケーションが起動したとき、すべてのサーバのチャンネル並び替えをロック状態にする
+ * Locks channel reordering on every registered server at startup
  */
 export class StartedAutoLockEvent extends BaseDiscordEvent<'ready'> {
   readonly eventName = 'ready'

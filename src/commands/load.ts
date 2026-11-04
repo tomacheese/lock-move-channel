@@ -12,7 +12,7 @@ import { LockMoveChannelServer } from '@/server'
 /**
  * lock-move-channel load
  *
- * チャンネル順番を保存した内容に従って並び替え（復元）する。
+ * Restores the channel order from the saved one.
  */
 export class LoadCommand implements BaseCommand {
   definition():
