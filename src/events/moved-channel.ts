@@ -33,7 +33,9 @@ export class MovedChannelEvent extends BaseDiscordEvent<'channelUpdate'> {
     const oldRawPosition = oldChannel.rawPosition
     const newRawPosition = newChannel.rawPosition
 
-    if (oldRawPosition === newRawPosition) {
+    const parentChanged = oldChannel.parentId !== newChannel.parentId
+
+    if (oldRawPosition === newRawPosition && !parentChanged) {
       return
     }
 
