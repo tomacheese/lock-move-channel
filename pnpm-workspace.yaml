@@ -4,4 +4,4 @@ minimumReleaseAgeExclude:
   - '@book000/*'
 # @discordjs/builders pins @sapphire/shapeshift to ^4, but shapeshift 4's types break with @types/node 26, so override it to 5.0.0. Remove this once @discordjs/builders supports shapeshift 5.
 overrides:
-  '@sapphire/shapeshift': 6.0.0
+  '@sapphire/shapeshift': 6.0.1
